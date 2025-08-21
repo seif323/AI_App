@@ -47,14 +47,14 @@ const userSchema = new mongoose.Schema({
         default: "https://example.com/default-avatar.png"
 }
 
-});
+}, { timestamps: true });
 
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
   let salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
-}, { timestamps: true });
+});
 
 
 module.exports = mongoose.model('User', userSchema);
