@@ -12,8 +12,16 @@ const sessionSchema = new mongoose.Schema({
   },
   sessionEnd: {
     type: Date,
-    required: true
+    // required: true
+    default : null
   },
+  status : {
+    type: String,
+    enum : ["active", "completed", "cancelled"],
+    default : "active"
+
+  },
+  
   focusLevel: {
     type: [Number],  // Array of numbers (ex: focus level per minute)
     default: []
